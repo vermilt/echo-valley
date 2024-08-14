@@ -5,12 +5,15 @@ function SearchBar() {
     const {query, setQuery} = useState('');
 
     return (
-        <input
+        <div>
+            <label>Search</label>
+            <input
                 type="text"
                 placeholder="Search..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
             />
+        </div>
     );
 }
 
