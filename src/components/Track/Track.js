@@ -1,4 +1,4 @@
-import React {useState} from "react";
+export {tracks};
 
 const tracks = [
     {
@@ -151,7 +151,6 @@ const tracks = [
         artist: "Underworld",
         album: "Trainspotting (Original Motion Picture Soundtrack)"
     },
-    // 200 additional tracks below:
     {
         id: 26,
         name: "Hyperballad",
@@ -351,3 +350,4 @@ const tracks = [
         album: "Cross"
     }
 ];
+

@@ -1,8 +1,13 @@
 import React, {useState} from "react";
+import { tracks } from "../Track/Track";
 import './SearchBar.css';
 
 function SearchBar() {
-    const {query, setQuery} = useState('');
+    const [query, setQuery] = useState('');
+
+    const handleChange = (event) => {
+        setQuery(event.target.value);
+    }
 
     return (
         <div className="Search">
@@ -11,7 +16,7 @@ function SearchBar() {
                 type="text"
                 placeholder="Find a song..."
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={handleChange}
             />
         </div>
     );
