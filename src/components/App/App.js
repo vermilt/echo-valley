@@ -1,5 +1,6 @@
 import SearchBar from '../SearchBar/SearchBar';
 import './App.css';
+import { tracks } from '../Track/Track';
 
 function App() {
   return (
@@ -7,7 +8,7 @@ function App() {
       <header className="App-header">
         <p>echoValley</p>
       </header>
-      <SearchBar/>
+      <SearchBar tracks={tracks}/>
     </div>
   );
 }
