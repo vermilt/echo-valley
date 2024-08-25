@@ -6,13 +6,15 @@ function SearchResults({ results }) {
     }
 
     return (
-        <ul>
-            {results.map(track => (
-                <li key={track.id}>
-                    <strong>{track.name}</strong> by {track.artist} from the album <em>{track.album}</em>
-                </li>
-            ))}
-        </ul>
+        <div className='Results'>
+            <ul>
+                {results.map(track => (
+                    <li key={track.id}>
+                        <strong>{track.name}</strong> by {track.artist} from the album <em>{track.album}</em>
+                    </li>
+                ))}
+            </ul>
+        </div>
     );
 }
 

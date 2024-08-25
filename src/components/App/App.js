@@ -11,6 +11,11 @@ function App() {
 
     const handleSearch = () => {
 
+      if (query.trim() === '') {
+        setShowResults([]);
+        return;
+      }
+
       const filteredTracks = tracks.filter(track =>
         track.name.toLowerCase().includes(query.toLowerCase()) ||
         track.artist.toLowerCase().includes(query.toLowerCase()) ||
@@ -22,10 +27,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>echoValley</p>
+        <h1>echoValley</h1>
       </header>
       <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch}/>
-      <SearchResults results={showResults} />
+      <div className='Results'>
+        <h2>Results</h2>
+        <SearchResults results={showResults} />
+      </div>
     </div>
   );
 }
