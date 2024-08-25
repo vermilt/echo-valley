@@ -1,11 +1,15 @@
 import React, {useState} from "react";
 import './SearchBar.css';
-import SearchResults from "../SearchResults/SearchResults";
 
-function SearchBar({ query, setQuery }) {
+
+function SearchBar({ query, setQuery, onSearch }) {
    
     const handleChange = (event) => {
         setQuery(event.target.value);
+    }
+
+    const handleSearch = () => {
+        onSearch();
     }
 
     return (
@@ -17,6 +21,7 @@ function SearchBar({ query, setQuery }) {
                 value={query}
                 onChange={handleChange}
             />
+            <button onClick={handleSearch}>Search</button>
         </div>
     );
 }
