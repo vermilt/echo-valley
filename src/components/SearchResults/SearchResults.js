@@ -1,4 +1,5 @@
 import React from 'react';
+import './SearchResults.css'
 
 function SearchResults({ results }) {
     if (results.length === 0) {
@@ -10,7 +11,7 @@ function SearchResults({ results }) {
             <ul>
                 {results.map(track => (
                     <li key={track.id}>
-                        <strong>{track.name}</strong> by {track.artist} from the album <em>{track.album}</em>
+                        <strong>{track.name}</strong> | {track.artist} | <em>{track.album}</em> <button>+</button>
                     </li>
                 ))}
             </ul>
