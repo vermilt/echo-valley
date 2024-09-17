@@ -11,7 +11,8 @@ function SearchResults({ results }) {
             <ul>
                 {results.map(track => (
                     <li key={track.id}>
-                        <strong>{track.name}</strong> | {track.artist} | <em>{track.album}</em> <button>+</button>
+                        <h3><strong>{track.name}</strong></h3> 
+                        <p>{track.artist} | <em>{track.album}</em> <button>+</button></p> 
                     </li>
                 ))}
             </ul>

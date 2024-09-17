@@ -30,10 +30,15 @@ function App() {
         <h1>echoValley</h1>
       </header>
       <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch}/>
-      <div className='Results'>
-        <h2>Results</h2>
-        <SearchResults results={showResults} />
-      </div>
+      <body className='Lists'>
+        <div className='Search-Results'>
+          <h2>Results</h2>
+          <SearchResults results={showResults} />
+        </div>
+        <div className='Playlist'>
+
+        </div>
+      </body>
     </div>
   );
 }

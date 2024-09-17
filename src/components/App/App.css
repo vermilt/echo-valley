@@ -24,5 +24,8 @@
   color: white;
 }
 
-
+.Lists {
+  display: flex;
+  justify-content: space-around;
+}
 
