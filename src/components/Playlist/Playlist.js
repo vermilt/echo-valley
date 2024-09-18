@@ -2,14 +2,14 @@ import React, {useState} from "react";
 import './Playlist.css';
 
 function Playlist ({ playlistTracks, onRemove }) {
-    const [name, setName] = useState('')
+    const [name, setName] = useState('New Playlist')
     
 
     return (
         <div>
             <input
             type="text"
-            placeholder="Playlist Name..."
+            placeholder="New Playlist"
             value={name}
             onChange={e => setName(e.target.value)}
             />
