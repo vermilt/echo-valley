@@ -8,6 +8,7 @@ import './App.css';
 function App() {
   const [query, setQuery] = useState('');
   const [showResults, setShowResults] = useState([]);
+  const [showPlaylist, setShowPlaylist] = useState([])
 
 
     const handleSearch = () => {
@@ -25,6 +26,18 @@ function App() {
       setShowResults(filteredTracks);
     };
 
+    const handleAdd = (track) => {
+      if (showPlaylist.find(newTrack => newTrack.id === track.id)) {
+        return;
+      }
+
+      setShowPlaylist([
+        ...showPlaylist,
+        track
+      ]);
+    };
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -33,11 +46,11 @@ function App() {
       <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch}/>
       <body className='Lists'>
         <div className='Search-Results'>
-          <h2>Results</h2>
-          <SearchResults results={showResults} />
+          
+          <SearchResults results={showResults} onAdd={handleAdd}/>
         </div>
         <div className='Playlist'>
-          <Playlist />
+          <Playlist playlistTracks={showPlaylist}/>
         </div>
       </body>
     </div>

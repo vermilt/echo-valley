@@ -1,19 +1,28 @@
 import React, {useState} from "react";
 import './Playlist.css';
 
-function Playlist () {
+function Playlist ({ playlistTracks }) {
     const [name, setName] = useState('')
-    const [playlist, setPlaylist] = useState([])
+    
 
     return (
         <div>
             <input
             type="text"
-            placeholder="Playlist Name"
+            placeholder="Playlist Name..."
             value={name}
             onChange={e => setName(e.target.value)}
             />
+            <ul>
+                {playlistTracks.map(track => (
+                    <li key={track.id}>
+                        <h3><strong>{track.name}</strong></h3> 
+                        <p>{track.artist} | <em>{track.album}</em> <button>-</button></p> 
+                    </li>
+                ))}
+            </ul>
         </div>
+        
     );
 }
 
