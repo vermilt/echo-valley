@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
+import Playlist from '../Playlist/Playlist';
 import { tracks } from '../Track/Track';
 import './App.css';
 
@@ -36,7 +37,7 @@ function App() {
           <SearchResults results={showResults} />
         </div>
         <div className='Playlist'>
-
+          <Playlist />
         </div>
       </body>
     </div>
