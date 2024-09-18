@@ -37,20 +37,43 @@ function App() {
       ]);
     };
 
+    const handleRemove = (track) => {
+      setShowPlaylist(showPlaylist.filter(keepTrack => {
+        return keepTrack.id !== track.id;
+      }))
+    };
+
 
   return (
     <div className="App">
+      
       <header className="App-header">
         <h1>echoValley</h1>
       </header>
-      <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch}/>
+
+      <SearchBar 
+        query={query} 
+        setQuery={setQuery} 
+        onSearch={handleSearch}
+      />
+
       <body className='Lists'>
         <div className='Search-Results'>
           
-          <SearchResults results={showResults} onAdd={handleAdd}/>
+          <SearchResults 
+            results={showResults} 
+            onAdd={handleAdd}
+          />
+
         </div>
+
         <div className='Playlist'>
-          <Playlist playlistTracks={showPlaylist}/>
+
+          <Playlist 
+            playlistTracks={showPlaylist} 
+            onRemove={handleRemove}
+          />
+
         </div>
       </body>
     </div>

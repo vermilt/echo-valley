@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import './Playlist.css';
 
-function Playlist ({ playlistTracks }) {
+function Playlist ({ playlistTracks, onRemove }) {
     const [name, setName] = useState('')
     
 
@@ -17,7 +17,7 @@ function Playlist ({ playlistTracks }) {
                 {playlistTracks.map(track => (
                     <li key={track.id}>
                         <h3><strong>{track.name}</strong></h3> 
-                        <p>{track.artist} | <em>{track.album}</em> <button>-</button></p> 
+                        <p>{track.artist} | <em>{track.album}</em> <button onClick={() => onRemove(track) }>-</button></p> 
                     </li>
                 ))}
             </ul>
