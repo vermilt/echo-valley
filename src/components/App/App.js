@@ -17,6 +17,7 @@ function App() {
         setShowResults([]);
         return;
       }
+      // stops all tracks being displayed if input is empty by setting setShowResults as empty array
 
       const filteredTracks = tracks.filter(track =>
         track.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -25,11 +26,13 @@ function App() {
     );
       setShowResults(filteredTracks);
     };
+      // filters tracks array to show values that only include query text
 
     const handleAdd = (track) => {
       if (showPlaylist.find(newTrack => newTrack.id === track.id)) {
         return;
       }
+      // checks if track already exists in showPlaylist, if so then does nothing
 
       setShowPlaylist([
         ...showPlaylist,
@@ -42,11 +45,11 @@ function App() {
         return keepTrack.id !== track.id;
       }))
     };
-
+      // sets setShowPlaylist to filter out removed track
 
   return (
     <div className="App">
-      
+
       <header className="App-header">
         <h1>echoValley</h1>
       </header>
