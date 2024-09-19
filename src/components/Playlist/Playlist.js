@@ -21,6 +21,7 @@ function Playlist ({ playlistTracks, onRemove, playlistName, setPlaylistName }) 
                     </li>
                 ))}
             </ul>
+            <button>Save to Spotify</button>
         </div>
         
     );
