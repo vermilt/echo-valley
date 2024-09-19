@@ -9,7 +9,7 @@ function Playlist ({ playlistTracks, onRemove, playlistName, setPlaylistName }) 
         <div>
             <input
             type="text"
-            placeholder="New Playlist"
+            // placeholder="New Playlist" not needed as default state used
             value={playlistName}
             onChange={e => setPlaylistName(e.target.value)}
             />
