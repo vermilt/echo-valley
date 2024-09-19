@@ -48,6 +48,8 @@ function App() {
     };
       // sets setShowPlaylist to filter out removed track
 
+      // savePlaylist function should take the uri of each track in showPlaylist and add them to a new array
+
     
 
   return (
