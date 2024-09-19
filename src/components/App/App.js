@@ -9,6 +9,7 @@ function App() {
   const [query, setQuery] = useState('');
   const [showResults, setShowResults] = useState([]);
   const [showPlaylist, setShowPlaylist] = useState([])
+  const [playlistName, setPlaylistName] = useState(['New Playlist'])
 
 
     const handleSearch = () => {
@@ -47,6 +48,8 @@ function App() {
     };
       // sets setShowPlaylist to filter out removed track
 
+    
+
   return (
     <div className="App">
 
@@ -75,6 +78,8 @@ function App() {
           <Playlist 
             playlistTracks={showPlaylist} 
             onRemove={handleRemove}
+            playlistName={playlistName}
+            setPlaylistName={setPlaylistName}
           />
 
         </div>

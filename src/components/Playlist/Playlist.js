@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import './Playlist.css';
 
-function Playlist ({ playlistTracks, onRemove }) {
-    const [name, setName] = useState('New Playlist')
+function Playlist ({ playlistTracks, onRemove, playlistName, setPlaylistName }) {
+    // const [name, setName] = useState('New Playlist')
     
 
     return (
@@ -10,8 +10,8 @@ function Playlist ({ playlistTracks, onRemove }) {
             <input
             type="text"
             placeholder="New Playlist"
-            value={name}
-            onChange={e => setName(e.target.value)}
+            value={playlistName}
+            onChange={e => setPlaylistName(e.target.value)}
             />
             <ul>
                 {playlistTracks.map(track => (
