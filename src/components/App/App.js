@@ -44,12 +44,28 @@ function App() {
     const handleRemove = (track) => {
       setShowPlaylist(showPlaylist.filter(keepTrack => {
         return keepTrack.id !== track.id;
-      }))
+      }));
     };
       // sets setShowPlaylist to filter out removed track
 
-      // savePlaylist function should take the uri of each track in showPlaylist and add them to a new array
+    const savePlaylist = () => {
+      const uris = showPlaylist.map(track => track.uri);
 
+      console.log(uris);
+        // spotify logic needed
+
+      setShowPlaylist([]);
+          // resets playlist after save
+      setPlaylistName('New Playlist')
+          // resets playlist name after save
+      }
+      
+      // savePlaylist function should take the uri of each track in showPlaylist and add them to a new array
+      // after playlist has been saved to Spotify, web app playlist should be reset
+      // 1. Create savePlaylist funtion in App
+      // 2. Creates variable, map playlistTracks.uri property
+      // 3. Pass onSave as prop into Playlist.js add onSave to button
+      // 4. Playlist component onSave{savePlaylist}
     
 
   return (
@@ -82,6 +98,7 @@ function App() {
             onRemove={handleRemove}
             playlistName={playlistName}
             setPlaylistName={setPlaylistName}
+            onSave={savePlaylist}
           />
 
         </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import './Playlist.css';
 
-function Playlist ({ playlistTracks, onRemove, playlistName, setPlaylistName }) {
+function Playlist ({ playlistTracks, onRemove, playlistName, setPlaylistName, onSave }) {
     // const [name, setName] = useState('New Playlist')
     
 
@@ -21,7 +21,7 @@ function Playlist ({ playlistTracks, onRemove, playlistName, setPlaylistName }) 
                     </li>
                 ))}
             </ul>
-            <button>Save to Spotify</button>
+            <button onClick={onSave}>Save to Spotify</button>
         </div>
         
     );
