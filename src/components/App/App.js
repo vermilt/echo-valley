@@ -4,13 +4,13 @@ import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 import { tracks } from '../Track/Track';
 import './App.css';
+import { Spotify } from '../../util/Spotify';
 
 function App() {
   const [query, setQuery] = useState('');
   const [showResults, setShowResults] = useState([]);
   const [showPlaylist, setShowPlaylist] = useState([])
   const [playlistName, setPlaylistName] = useState(['New Playlist'])
-
 
     const handleSearch = () => {
 
