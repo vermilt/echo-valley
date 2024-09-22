@@ -19,13 +19,19 @@ function App() {
         return;
       }
       // stops all tracks being displayed if input is empty by setting setShowResults as empty array
-
-      const filteredTracks = tracks.filter(track =>
+      Spotify.search(query).then((results) => {
+        if (results) {
+            setShowResults(results);
+        } else {
+            console.log('No results found.');
+        }
+    });
+      /*const filteredTracks = tracks.filter(track =>
         track.name.toLowerCase().includes(query.toLowerCase()) ||
         track.artist.toLowerCase().includes(query.toLowerCase()) ||
         track.album.toLowerCase().includes(query.toLowerCase())
-    );
-      setShowResults(filteredTracks);
+    );*/
+      //setShowResults(filteredTracks);
     };
       // filters tracks array to show values that only include query text
 
