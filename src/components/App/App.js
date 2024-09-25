@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
-import { tracks } from '../Track/Track';
+// import { tracks } from '../Track/Track';
 import './App.css';
 import { Spotify } from '../../util/Spotify';
 
@@ -57,12 +57,14 @@ function App() {
     const savePlaylist = () => {
       const uris = showPlaylist.map(track => track.uri);
 
-      console.log(uris);
+      // console.log(uris);
         // spotify logic needed
-
-      setShowPlaylist([]);
+        Spotify.save(uris, playlistName);
+        setShowPlaylist([]);
+        setPlaylistName('New Playlist');
+        alert(`Your playlist: ${playlistName} was successfully added to Spotify!`)
           // resets playlist after save
-      setPlaylistName('New Playlist')
+      
           // resets playlist name after save
       }
       

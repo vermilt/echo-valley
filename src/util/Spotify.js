@@ -59,8 +59,9 @@ const Spotify = {
         });
     },
 
-    save() {
+    save(uris, playlistName) {
         let user_id = {};
+        let playlist_id = {};
         accessToken = Spotify.getAccessToken();
         return fetch('https://api.spotify.com/v1/me', {
             method: 'GET',
@@ -72,21 +73,51 @@ const Spotify = {
             }
             return response.json();
         })
-        .then(jsonResponse => {
-            user_id = jsonResponse.id;
+        .then(data => {
+            user_id = data.id;
         
 
             return fetch(`https://api.spotify.com/v1/users/${user_id}/playlists`, {
                 method: 'POST',
                 headers: {Authorization: `Bearer ${accessToken}`},
                 body: JSON.stringify({
-                    "name": this.playlistName,
+                    "name": playlistName,
                     "description": "New playlist description",
                     "public": false
                 },),
             })
         })
-        
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch User Playlist info from Spotify API');
+            }
+            
+            return response.json();
+            
+        })
+        .then(data => {
+            playlist_id = data.id;
+
+            return fetch(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`, {
+                method: 'POST',
+                headers: {Authorization: `Bearer ${accessToken}`},
+                body: JSON.stringify({
+                    "uris": uris,
+                },),
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to add tracks to playlist from Spotify API');
+            }
+            
+            return response.json();
+        })
+        .then(jsonResponse => {
+            console.log(jsonResponse)
+        }
+            
+        )
     },
         
     // Fetch get request to obtain user ID at https://api.spotify.com/v1/me, save as var
