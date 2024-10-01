@@ -4,19 +4,35 @@ var redirect_uri = 'http://localhost:3000/callback';
 var scope = 'playlist-modify-private playlist-modify-public user-read-private user-read-email';
 
 const Spotify = {
-    getAccessToken() {
+    async getAccessToken() {
+
+        // checks if token is set
         if (accessToken) return accessToken;
+
+        // checks local storage for token
+        const storedAccessToken = localStorage.getItem('spotify_access_token');
+        const tokenExpiryTime = localStorage.getItem('spotify_token_expiry_time');
+
+        // If the token exists in localStorage and hasn't expired, use it
+        if (storedAccessToken && new Date().getTime() < tokenExpiryTime) {
+            accessToken = storedAccessToken;
+            return accessToken;
+        }
+
         const tokenInURL = window.location.href.match(/access_token=([^&]*)/);
         const expiryTime = window.location.href.match(/expires_in=([^&]*)/);
 
         if (tokenInURL && expiryTime) {
             // sets the token and expiry time vars
             accessToken = tokenInURL[1];
-            const expiresIn = Number(expiryTime[1]);
+            const expiresIn = Number(expiryTime[1]) * 1000; // Convert to milliseconds
+            const expiryTimeStamp = new Date().getTime() + expiresIn;
 
-            // sets a function that resets the token when expired
-            window.setTimeout(() => (accessToken = ""), expiresIn * 1000);
-            // clear URL
+            // Stores token and expiry time in localStorage
+            localStorage.setItem('spotify_access_token', accessToken);
+            localStorage.setItem('spotify_token_expiry_time', expiryTimeStamp);
+
+            // clears URL
             window.history.pushState("Access token", null, "/")
             return accessToken;
         }
@@ -29,19 +45,28 @@ const Spotify = {
         window.location = url;
     },
 
-    search(query) {
-        accessToken = Spotify.getAccessToken();
+    async search(query) { 
+
+        accessToken = await Spotify.getAccessToken();
+
+        if (!accessToken) {
+            console.error("No access Access Token available");
+            return [];
+        }
+
         return fetch(`https://api.spotify.com/v1/search?type=track%2Cartist%2Calbum&q=${query}`, {
             method: 'GET',
             headers: {Authorization: `Bearer ${accessToken}`},
         })
         .then(response => {
             if (!response.ok) {
+                console.error('Failed to fetch from Spotify API:', response.status, response.statusText);
                 throw new Error('Failed to fetch from Spotify API');
             }
             return response.json();
         })
         .then(jsonResponse => {
+            console.log("Search API response:", jsonResponse);
             if (!jsonResponse || !jsonResponse.tracks) {
                 console.log("No tracks found");
                 return [];
@@ -59,23 +84,32 @@ const Spotify = {
         });
     },
 
-    save(uris, playlistName) {
+    async save(uris, playlistName)  {
+
+        accessToken = await Spotify.getAccessToken();
+
+        console.log("Saving playlist with name:", playlistName);
+        console.log("Track URIs to save:", uris);
+
         let user_id = {};
         let playlist_id = {};
-        accessToken = Spotify.getAccessToken();
+        ;
+
+        console.log(accessToken);
         return fetch('https://api.spotify.com/v1/me', {
             method: 'GET',
             headers: {Authorization: `Bearer ${accessToken}`},
         }) 
         .then(response => {
             if (!response.ok) {
+                console.error('Failed to fetch User info from Spotify API:', response.status, response.statusText);
                 throw new Error('Failed to fetch User info from Spotify API');
             }
             return response.json();
         })
         .then(data => {
+            console.log("User Info fetched:", data);
             user_id = data.id;
-        
 
             return fetch(`https://api.spotify.com/v1/users/${user_id}/playlists`, {
                 method: 'POST',
@@ -88,14 +122,17 @@ const Spotify = {
             })
         })
         .then(response => {
+
             if (!response.ok) {
-                throw new Error('Failed to fetch User Playlist info from Spotify API');
+                console.error('Failed to create playlist:', response.status, response.statusText);
+                throw new Error('Failed to create playlist:');
             }
             
             return response.json();
             
         })
         .then(data => {
+            console.log("Playlist created:", data);
             playlist_id = data.id;
 
             return fetch(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`, {
@@ -107,18 +144,42 @@ const Spotify = {
             })
         })
         .then(response => {
+
             if (!response.ok) {
-                throw new Error('Failed to add tracks to playlist from Spotify API');
+                console.error('Failed to add tracks to playlist:', response.status, response.statusText);
+                throw new Error('Failed to add tracks to playlist');
             }
             
             return response.json();
         })
         .then(jsonResponse => {
-            console.log(jsonResponse)
-        }
-            
-        )
+            console.log("Tracks added to playlist:", jsonResponse);
+        })
+        .catch(error => {
+            console.error("Error saving playlist:", error);
+        });
     },
+};
+
+    /*
+    logout() {
+
+        // Clear the access token from localStorage and the in-memory variable
+        localStorage.removeItem('spotify_access_token');
+        localStorage.removeItem('spotify_token_expiry_time');
+        accessToken = null;
+    
+        // Add debugging to confirm removal
+        console.log("Access token cleared:", localStorage.getItem('spotify_access_token') === null);
+    
+        // Force a re-render by changing state if necessary
+        window.location = 'https://accounts.spotify.com/logout';
+        setTimeout(() => {
+            window.location = '/'; // Redirect to your app's home page after logging out of Spotify
+        }, 500); // Adjust the delay as needed
+    },
+    */
+    
         
     // Fetch get request to obtain user ID at https://api.spotify.com/v1/me, save as var
     // To create a new playlist, you will need to make a POST request to the /v1/users/{user_id}/playlists endpoint.
@@ -126,6 +187,6 @@ const Spotify = {
     //vTo add tracks to the new playlist, you will need to make a POST request 
     // to the //v1/users/{user_id}/playlists/{playlist_id}/tracks
     // You can provide a list of track IDs in the request body to add them to the playlist.
-};
+
 
 export { Spotify };

@@ -5,6 +5,7 @@ import Playlist from '../Playlist/Playlist';
 // import { tracks } from '../Track/Track';
 import './App.css';
 import { Spotify } from '../../util/Spotify';
+// import Logout from '../Logout/Logout';
 
 function App() {
   const [query, setQuery] = useState('');
@@ -62,11 +63,18 @@ function App() {
         Spotify.save(uris, playlistName);
         setShowPlaylist([]);
         setPlaylistName('New Playlist');
+        setShowResults([]);
+        setQuery('')
         alert(`Your playlist: ${playlistName} was successfully added to Spotify!`)
           // resets playlist after save
       
           // resets playlist name after save
       }
+
+      /*const handleLogout = () => {
+        console.log("User has logged out");
+        
+    };*/
       
       // savePlaylist function should take the uri of each track in showPlaylist and add them to a new array
       // after playlist has been saved to Spotify, web app playlist should be reset
@@ -81,6 +89,7 @@ function App() {
 
       <header className="App-header">
         <h1>echoValley</h1>
+        
       </header>
 
       <SearchBar 
@@ -111,6 +120,7 @@ function App() {
 
         </div>
       </body>
+      
     </div>
   );
 }
