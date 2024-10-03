@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import './SearchBar.css';
 
 
@@ -13,15 +13,16 @@ function SearchBar({ query, setQuery, onSearch }) {
     }
 
     return (
-        <div className="Search">
-            <label>Search</label>
-            <input
-                type="text"
-                placeholder="Find a song..."
-                value={query}
-                onChange={handleChange}
-            />
-            <button onClick={handleSearch}>Search</button>
+        <div className="Search" role="search">
+            <form>
+                <input
+                    type="text"
+                    placeholder="Find a song..."
+                    value={query}
+                    onChange={handleChange}
+                />
+                <button type="submit" onClick={handleSearch}>Search</button>
+            </form>
         </div>
     );
 }

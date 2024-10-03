@@ -88,39 +88,45 @@ function App() {
     <div className="App">
 
       <header className="App-header">
+        
         <h1>echoValley</h1>
         
       </header>
 
-      <SearchBar 
-        query={query} 
-        setQuery={setQuery} 
-        onSearch={handleSearch}
-      />
+      <main>
 
-      <body className='Lists'>
-        <div className='Search-Results'>
-          
-          <SearchResults 
-            results={showResults} 
-            onAdd={handleAdd}
-          />
+        <SearchBar 
+          query={query} 
+          setQuery={setQuery} 
+          onSearch={handleSearch}
+        />
 
-        </div>
+        <body className='Lists'>
+          <div className='Search-Results'>
+            
+            <SearchResults 
+              results={showResults} 
+              onAdd={handleAdd}
+            />
 
-        <div className='Playlist'>
+          </div>
 
-          <Playlist 
-            playlistTracks={showPlaylist} 
-            onRemove={handleRemove}
-            playlistName={playlistName}
-            setPlaylistName={setPlaylistName}
-            onSave={savePlaylist}
-          />
+          <div className='Playlist'>
 
-        </div>
-      </body>
-      
+            <Playlist 
+              playlistTracks={showPlaylist} 
+              onRemove={handleRemove}
+              playlistName={playlistName}
+              setPlaylistName={setPlaylistName}
+              onSave={savePlaylist}
+            />
+
+          </div>
+
+        </body>
+
+      </main>
+
     </div>
   );
 }

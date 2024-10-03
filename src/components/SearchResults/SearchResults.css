@@ -1,4 +1,21 @@
 ul {
     list-style-type: none;
     text-align: start;
+    background-color: ;
+    margin-top: auto;
+    padding-right: 40px;
+    padding-left: 20px;
+    
+}
+
+li {
+    border-bottom: dashed black;
+}
+
+li button {
+    float: right;
+}
+
+h2 {
+    margin: 20px 0 20px 0;
 }
