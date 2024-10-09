@@ -12,8 +12,8 @@ function SearchResults({ results, onAdd }) {
             <ul>
                 {results.map(track => (
                     <li key={track.id}>
-                        <h3><strong>{track.name}</strong></h3> 
-                        <p>{track.artist} | <em>{track.album}</em> <button onClick={() => onAdd(track)}>+</button></p> 
+                        <h3><strong>{track.name}</strong></h3> <button onClick={() => onAdd(track)}>+</button>
+                        <p>{track.artist} | <em>{track.album}</em></p> 
                         
                     </li>
                 ))}

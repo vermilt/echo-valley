@@ -1,7 +1,7 @@
 ul {
     list-style-type: none;
     text-align: start;
-    background-color: ;
+    
     margin-top: auto;
     padding-right: 40px;
     padding-left: 20px;
@@ -14,8 +14,20 @@ li {
 
 li button {
     float: right;
+    border-radius: 7px;
+    border: none;
+    border-bottom: 2px solid #F0ADCA;
+    border-left: 1px solid #F0ADCA;
+    background-color: #461D2F;
+    color: rgba(175, 255, 177, 0.861);
+    height: 25px;
+    width: 25px;
+    font-size: 20px;
+    
 }
 
-h2 {
+.Search-Results h2 {
     margin: 20px 0 20px 0;
+    font-size: 24px;
 }
+

@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: ;
+  
   background-image: url('/Users/tommilton/echo-valley/src/img/16A_00010-2 pink.jpg');
   background-size: cover;
   background-position: center;
@@ -18,50 +18,55 @@
   }
 }
 
-main {
-  
-}
+
 
 .App-header {
   /*background-color: #44537e;
   */
-  
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color:  rgba(175, 255, 177, 0.861);;
+  
 }
 
 .App-header h1 {
-  font-size: 72px;
+  font-size: 18vw;
+  margin: 0;
+}
+
+Main {
+  box-sizing: border-box;
 }
 
 .Search {
+  display: flex;
+  flex-direction: column;
   padding: 0px 0 40px 0;
-  
+  align-items: center;
+  gap: 20px;
 }
 
 .Lists {
   display: flex;
   justify-content: center;
+  
   gap: 40px;
-  margin-left: 20px;
+  /*margin-left: 20px;
   margin-right: 20px;
+  
+  - Taking out due to 45% max-width*/
   padding: 0;
-  display: flex;
   height: 100vh;
   box-sizing: border-box;
   
 }
 
 
-
 .Search-Results,
 .Playlist {
   flex: 1; /* Makes both columns equal width */
-  max-width: 600px; /* Optional: Limit the max width of each column */
+  max-width: 45%; /* Optional: Limit the max width of each column */
+  box-sizing: border-box;
   padding: 10px; /* Adds some padding inside each column */
   background: rgba(228, 228, 228, 0.7);
   min-height: 50%;
@@ -69,3 +74,20 @@ main {
   overflow: scroll;
 }
 
+::selection {
+  background: rgb(82, 82, 82);
+}
+
+@media (max-width: 768px) { /* You can adjust the breakpoint as needed */
+  .Lists {
+    flex-direction: column; /* Stack the elements vertically */
+    align-items: center; /* Center them on the page */
+    
+  }
+
+  .Search-Results,
+  .Playlist {
+    width: 90%; /* Make both take full width */
+    max-width: 90%;
+  }
+}

@@ -8,21 +8,29 @@ function SearchBar({ query, setQuery, onSearch }) {
         setQuery(event.target.value);
     }
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            onSearch();
+        }
+    };
+
+
     const handleSearch = () => {
         onSearch();
     }
 
     return (
         <div className="Search" role="search">
-            <form>
+            
                 <input
                     type="text"
                     placeholder="Find a song..."
                     value={query}
                     onChange={handleChange}
+                    onKeyDown={handleKeyDown}
                 />
                 <button type="submit" onClick={handleSearch}>Search</button>
-            </form>
+            
         </div>
     );
 }

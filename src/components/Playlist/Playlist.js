@@ -16,12 +16,12 @@ function Playlist ({ playlistTracks, onRemove, playlistName, setPlaylistName, on
             <ul>
                 {playlistTracks.map(track => (
                     <li key={track.id}>
-                        <h3><strong>{track.name}</strong></h3> 
-                        <p>{track.artist} | <em>{track.album}</em> <button onClick={() => onRemove(track) }>-</button></p> 
+                        <h3><strong>{track.name}</strong></h3><button onClick={() => onRemove(track) }>-</button>
+                        <p>{track.artist} | <em>{track.album}</em> </p> 
                     </li>
                 ))}
             </ul>
-            <button onClick={onSave}>Save to Spotify</button>
+            <button className="Save" onClick={onSave}>Save to Spotify</button>
         </div>
         
     );

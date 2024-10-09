@@ -11,7 +11,7 @@ function App() {
   const [query, setQuery] = useState('');
   const [showResults, setShowResults] = useState([]);
   const [showPlaylist, setShowPlaylist] = useState([])
-  const [playlistName, setPlaylistName] = useState(['New Playlist'])
+  const [playlistName, setPlaylistName] = useState(['New Playlist...'])
 
     const handleSearch = () => {
 
@@ -88,12 +88,12 @@ function App() {
     <div className="App">
 
       <header className="App-header">
-        
+
         <h1>echoValley</h1>
         
       </header>
 
-      <main>
+      <div className="Main">
 
         <SearchBar 
           query={query} 
@@ -101,7 +101,7 @@ function App() {
           onSearch={handleSearch}
         />
 
-        <body className='Lists'>
+        <div className='Lists'>
           <div className='Search-Results'>
             
             <SearchResults 
@@ -123,9 +123,9 @@ function App() {
 
           </div>
 
-        </body>
+        </div>
 
-      </main>
+      </div>
 
     </div>
   );
