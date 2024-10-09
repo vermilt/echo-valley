@@ -19,6 +19,7 @@ const Spotify = {
             return accessToken;
         }
 
+        // Check if the token is in the URL (if the user just authenticated)
         const tokenInURL = window.location.href.match(/access_token=([^&]*)/);
         const expiryTime = window.location.href.match(/expires_in=([^&]*)/);
 
@@ -32,45 +33,52 @@ const Spotify = {
             localStorage.setItem('spotify_access_token', accessToken);
             localStorage.setItem('spotify_token_expiry_time', expiryTimeStamp);
 
-            // clears URL
-            window.history.pushState("Access token", null, "/")
+            // clears URL of token information
+            window.history.pushState("Access token", null, "/");
             return accessToken;
         }
 
-        var url = 'https://accounts.spotify.com/authorize';
-            url += '?response_type=token';
-            url += '&client_id=' + encodeURIComponent(client_id);
-            url += '&scope=' + encodeURIComponent(scope);
-            url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
-        window.location = url;
+        // If no token is available, initiate authorization
+        this.redirectToSpotifyLogin();
     },
 
+    redirectToSpotifyLogin() {
+        const url = 'https://accounts.spotify.com/authorize';
+        const authUrl = `${url}?response_type=token&client_id=${encodeURIComponent(client_id)}&scope=${encodeURIComponent(scope)}&redirect_uri=${encodeURIComponent(redirect_uri)}`;
+        window.location = authUrl;
+    },
+    
+
     async search(query) { 
-
-        accessToken = await Spotify.getAccessToken();
-
-        if (!accessToken) {
-            console.error("No access Access Token available");
-            return [];
-        }
-
-        return fetch(`https://api.spotify.com/v1/search?type=track%2Cartist%2Calbum&q=${query}`, {
-            method: 'GET',
-            headers: {Authorization: `Bearer ${accessToken}`},
-        })
-        .then(response => {
+        try {
+            accessToken = await Spotify.getAccessToken();
+    
+            if (!accessToken) {
+                console.error("No Access Token available");
+                return [];
+            }
+    
+            const response = await fetch(`https://api.spotify.com/v1/search?type=track%2Cartist%2Calbum&q=${query}`, {
+                method: 'GET',
+                headers: {Authorization: `Bearer ${accessToken}`},
+            });
+    
             if (!response.ok) {
-                console.error('Failed to fetch from Spotify API:', response.status, response.statusText);
+                if (response.status === 401) {
+                    // If unauthorized (token expired), trigger re-authentication
+                    console.log("Token expired, redirecting to login...");
+                    this.redirectToSpotifyLogin();
+                }
                 throw new Error('Failed to fetch from Spotify API');
             }
-            return response.json();
-        })
-        .then(jsonResponse => {
-            console.log("Search API response:", jsonResponse);
+    
+            const jsonResponse = await response.json();
+    
             if (!jsonResponse || !jsonResponse.tracks) {
                 console.log("No tracks found");
                 return [];
             }
+    
             return jsonResponse.tracks.items.map(track => ({
                 id: track.id,
                 name: track.name,
@@ -78,11 +86,11 @@ const Spotify = {
                 album: track.album.name,
                 uri: track.uri,
             }));
-        })
-        .catch(error => {
+        } catch (error) {
             console.error("Error fetching Spotify data:", error);
-        });
+        }
     },
+    
 
     async save(uris, playlistName)  {
 
