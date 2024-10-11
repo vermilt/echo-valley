@@ -19,12 +19,14 @@ li button {
     border-bottom: 2px solid #F0ADCA;
     border-left: 1px solid #F0ADCA;
     background-color: rgba(175, 255, 177, 0.861);
-    color: #461D2F;
+    color: hsl(293, 53%, 9%);
     height: 25px;
     width: 25px;
     font-size: 20px;
-    
+    line-height: 20px;
 }
+
+
 
 li button:hover {
     background-color: rgba(119, 255, 123, 0.861);
@@ -32,7 +34,12 @@ li button:hover {
 }
 
 .Search-Results h2 {
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
     margin: 20px 0 20px 0;
     font-size: 24px;
 }
+
 
