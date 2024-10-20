@@ -42,6 +42,7 @@ button {
   font-style: normal;
   font-size: 18vw;
   margin: 0;
+  text-shadow: -1px 3px #ed74a9;
 }
 
 input {

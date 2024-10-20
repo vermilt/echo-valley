@@ -1,5 +1,9 @@
 export {tracks};
 
+/**
+ * This contains mock data which resembles the returned spotify API data
+ */
+
 const tracks = [
     {
         id: 1,
