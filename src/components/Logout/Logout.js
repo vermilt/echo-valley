@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { Spotify } from "../../util/Spotify";
 
+/** Logout feature was removed as log in should be prompted when access token is expired */
+
 function Logout({onLogout}) {
 
     const [isLoggedIn, setIsLoggedIn] = useState('');

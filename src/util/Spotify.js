@@ -93,6 +93,10 @@ const Spotify = {
     
 
     async save(uris, playlistName)  {
+        /** To save a Playlist, we must get the current users Spotify ID, 
+         * then use their Spotify Id to create a playlist and get the playlist ID,
+         * then add the track URIs to the playlist ID
+         */
 
         accessToken = await Spotify.getAccessToken();
 
@@ -101,9 +105,8 @@ const Spotify = {
 
         let user_id = {};
         let playlist_id = {};
-        ;
-
-        console.log(accessToken);
+        
+        // Call to receive User ID
         return fetch('https://api.spotify.com/v1/me', {
             method: 'GET',
             headers: {Authorization: `Bearer ${accessToken}`},
@@ -115,10 +118,13 @@ const Spotify = {
             }
             return response.json();
         })
+
+        // Save the returned ID to user_id
         .then(data => {
             console.log("User Info fetched:", data);
             user_id = data.id;
-
+            
+            // Create a playlist on the users account and setting the playlist name
             return fetch(`https://api.spotify.com/v1/users/${user_id}/playlists`, {
                 method: 'POST',
                 headers: {Authorization: `Bearer ${accessToken}`},
@@ -139,10 +145,12 @@ const Spotify = {
             return response.json();
             
         })
+        // Save the playlist ID to a variable
         .then(data => {
             console.log("Playlist created:", data);
             playlist_id = data.id;
 
+            // Add uris to the playlist
             return fetch(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`, {
                 method: 'POST',
                 headers: {Authorization: `Bearer ${accessToken}`},
@@ -169,7 +177,7 @@ const Spotify = {
     },
 };
 
-    /*
+    /* Feature removed and created in own component, later removed
     logout() {
 
         // Clear the access token from localStorage and the in-memory variable
@@ -184,15 +192,16 @@ const Spotify = {
         window.location = 'https://accounts.spotify.com/logout';
         setTimeout(() => {
             window.location = '/'; // Redirect to your app's home page after logging out of Spotify
-        }, 500); // Adjust the delay as needed
+        }, 500); 
     },
     */
     
+    // Previous notes left under
         
     // Fetch get request to obtain user ID at https://api.spotify.com/v1/me, save as var
     // To create a new playlist, you will need to make a POST request to the /v1/users/{user_id}/playlists endpoint.
     // Set name of playlist
-    //vTo add tracks to the new playlist, you will need to make a POST request 
+    // To add tracks to the new playlist, you will need to make a POST request 
     // to the //v1/users/{user_id}/playlists/{playlist_id}/tracks
     // You can provide a list of track IDs in the request body to add them to the playlist.
 

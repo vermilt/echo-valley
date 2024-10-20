@@ -8,6 +8,7 @@ import './App.css';
 import { Spotify } from '../../util/Spotify';
 // import Logout from '../Logout/Logout';
 
+
 function App() {
   const [query, setQuery] = useState('');
   const [showResults, setShowResults] = useState([]);
