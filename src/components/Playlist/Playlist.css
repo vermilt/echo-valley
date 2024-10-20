@@ -12,6 +12,7 @@ ul {
     border-bottom: 2px solid #F0ADCA;
     font-size: 24px;
     color:  rgba(39, 39, 39, 0.861);
+    
 }
 
 .Playlist .Save {
@@ -23,7 +24,6 @@ ul {
     font-size: 24px;
     font-weight: 600;
     min-width: 60%;
-    
     color: hsl(293, 53%, 9%);
     min-height: 4vw;
 }
@@ -31,6 +31,7 @@ ul {
 .Playlist .Save:hover {
     background-color: rgba(119, 255, 123, 0.861);
     cursor: pointer;
+    font-size: 25px;
 }
 
 .Playlist .Save:active {

@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   
-  background-image: url('/Users/tommilton/echo-valley/src/img/16A_00010-2 pink.jpg');
+  background-image: url('/src/img/16A_00010-2 pink.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -47,7 +47,7 @@ button {
 input {
   font-family: "Noto Sans", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 600;
   font-style: normal;
 }
 
@@ -93,6 +93,15 @@ Main {
 
 ::selection {
   background: rgb(82, 82, 82);
+}
+
+footer h4 {
+  color: rgba(240, 248, 255, 0.857);
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
 }
 
 @media (max-width: 768px) { /* You can adjust the breakpoint as needed */

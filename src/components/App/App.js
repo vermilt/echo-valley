@@ -126,6 +126,9 @@ function App() {
         </div>
 
       </div>
+      <footer>
+        <h4>Tom Milton 2024</h4>
+      </footer>
 
     </div>
   );
