@@ -29,7 +29,9 @@ function App() {
             console.log('No results found.');
         }
     });
-      /*const filteredTracks = tracks.filter(track =>
+      /* Mock function to filter through the tracks object array and set ShowResults tracks matching the query
+      
+      const filteredTracks = tracks.filter(track =>
         track.name.toLowerCase().includes(query.toLowerCase()) ||
         track.artist.toLowerCase().includes(query.toLowerCase()) ||
         track.album.toLowerCase().includes(query.toLowerCase())
@@ -61,7 +63,7 @@ function App() {
       const uris = showPlaylist.map(track => track.uri);
 
       // console.log(uris);
-        // spotify logic needed
+        // spotify
         Spotify.save(uris, playlistName);
         setShowPlaylist([]);
         setPlaylistName('New Playlist');
