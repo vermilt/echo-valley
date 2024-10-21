@@ -1,6 +1,6 @@
 let accessToken;
 var client_id = '2c2045eba076409ea93090758c1873c9';
-var redirect_uri = 'http://localhost:3000/callback';
+var redirect_uri = 'https://vermilt.github.io/echo-valley/callback';
 var scope = 'playlist-modify-private playlist-modify-public user-read-private user-read-email';
 
 const Spotify = {
