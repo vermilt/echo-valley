@@ -50,6 +50,9 @@ function App() {
         ...showPlaylist,
         track
       ]);
+
+      setShowResults(showResults.filter((result) => result.id !== track.id));
+      // filters showResults to remove added track
     };
 
     const handleRemove = (track) => {
